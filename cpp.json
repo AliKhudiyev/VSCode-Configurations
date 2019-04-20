@@ -1,0 +1,148 @@
+{
+	"Default": {
+		"prefix": "cpp",
+		"body": [
+			"#include<iostream>\n",
+			"using namespace std;\n",
+			"int main(int argc, char* argv[]){\n",
+				"\t$0\n",
+				"\treturn 0;",
+			"}"
+		],
+		"description": "Default C++ code"
+	},
+
+	"Variable define": {
+		"prefix": "vdef",
+		"body": [
+			"#define ${1:VAR}\t${2:value}"
+		],
+		"description": "Variable Define"
+	},
+
+	"Function define": {
+		"prefix": "fdef",
+		"body": [
+			"#define ${1:FUNCTION}(${2:arg})\t\\",
+			"\t$0"
+		],
+		"description": "Function define"
+	},
+
+	"Header define": {
+		"prefix": "hdef",
+		"body": [
+			"#ifndef ${1:${TM_FILENAME/(.*)/${1:/upcase}/g}}",
+			"#define $1",
+			"\n$0\n",
+			"#endif\n"
+		],
+		"description": "Header define"
+	},
+
+	"Comment": {
+		"prefix": ["comment", "cmm"],
+		"body": [
+			"/*",
+			" * $0",
+			"*/"
+		],
+		"description": "Comment"
+	},
+
+	"Print Time": {
+		"prefix": ["pctime", "pct"],
+		"body": [
+			"std::cout<<\"\\t\\033[44mTime: \"<<$CURRENT_DATE<<' '<<\"$CURRENT_MONTH_NAME\"<<' '<<$CURRENT_YEAR<<\", \";",
+			"std::cout<<$CURRENT_HOUR<<\":\"<<$CURRENT_MINUTE<<\":\"<<$CURRENT_SECOND<<\"\\033[0m\\n\";"
+		],
+		"description": "Printing the current time"
+	},
+
+	"Print Console": {
+		"prefix": ["pc", "print", "log"],
+		"body": [
+			"std::cout<<\"$0\";"
+		],
+		"description": "Console Printing"
+	},
+
+	"Print Debugging": {
+		"prefix": "ldebug",
+		"body": [
+			"std::cout<<\"\\t\\033[35mDebugging in line \\033[1;4m\"<<$TM_LINE_NUMBER<<\"\\033[0;35;24m passed.\\033[0m\\n\";"
+		],
+		"description": "Debugging in line"
+	},
+
+	"File Debugging": {
+		"prefix": "filedebug",
+		"body": [
+			"std::cout<<\"\\t\\033[36mDebugging in file \\033[1;4m\"<<\"$TM_FILENAME\"<<\"\\033[0;36;24m passed.\\033[0m\\n\";"
+		],
+		"description": "Debugging in file"
+	},
+
+	"Function Debugging": {
+		"prefix": "fdebug",
+		"body": [
+			"std::cout<<\"\\t\\033[32mDebugging in function \\033[1;4m\"<<\"${1:function}\"<<\"\\033[0;32;24m passed.\\033[0m\\n\";"
+		],
+		"description": "Debugging in function"
+	},
+
+	"Iterate with for": {
+		"prefix": "fori",
+		"body": [
+			"for(int ${1:i}=0;$1<$2;++$1){\n\t$0\n}"
+
+		],
+		"description": "From 0 to the number you give."
+	},
+
+	"Void function":{
+		"prefix": "vfunc",
+		"body": [
+			"void ${1:function}($2){\n\t$0\n}"
+		],
+		"description": "Void function declaration"
+	},
+
+	"Template function": {
+		"prefix": ["tfunc", "tempfunc"],
+		"body": [
+			"template<typename ${1:T}>",
+			"$1 ${2:function}($3){\n\t$0\n}"
+		],
+		"description": "Template function"
+	},
+
+	"Template class": {
+		"prefix": ["tclass", "tempclass", "tcls"],
+		"body": [
+			"template<class ${1:T}>",
+			"class ${2:A}{",
+				"\tprivate:\n",
+				"\tpublic:",
+				"\t$2();",
+				"\t~$2();\n",
+			"};"
+		],
+		"description": "Template class"
+	},
+
+	"Fork": {
+		"prefix": ["fork", "cp"],
+		"body": [
+			"pid_t ${1:pid}=fork();",
+			"if($1==-1) exit(1); // Error",
+			"else if($1==0){ // Child proc",
+				"\t$0",
+			"}",
+			"else{ // Parent proc",
+				"\t",
+			"}"
+		],
+		"description": "Fork (creating a process)"
+	}
+}
