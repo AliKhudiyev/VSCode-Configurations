@@ -12,6 +12,32 @@
 		"description": "Default C++ code"
 	},
 
+	"Default Header": {
+		"prefix": "hpp",
+		"body": [
+			"/*",
+			" * ${1:HEADER FILE}",
+			"*/",
+			"\n#pragma once\n",
+			"$0\n"
+		],
+		"description": "Default C++ header file"
+	},
+
+	"Default C Header": {
+		"prefix": "chdr",
+		"body": [
+			"/*",
+			" * ${1:HEADER}",
+			"*/",
+			"\n#ifndef $1",
+			"#define $1",
+			"\n$0\n",
+			"#endif\n"
+		],
+		"description": "Default C header file"
+	},
+
 	"Variable define": {
 		"prefix": "vdef",
 		"body": [
@@ -53,8 +79,8 @@
 	"Print Time": {
 		"prefix": ["pctime", "pct"],
 		"body": [
-			"std::cout<<\"\\t\\033[44mTime: \"<<$CURRENT_DATE<<' '<<\"$CURRENT_MONTH_NAME\"<<' '<<$CURRENT_YEAR<<\", \";",
-			"std::cout<<$CURRENT_HOUR<<\":\"<<$CURRENT_MINUTE<<\":\"<<$CURRENT_SECOND<<\"\\033[0m\\n\";"
+			"std::cout<<\"\\t\\033[44mTime: \"<<\"$CURRENT_DATE\"<<' '<<\"$CURRENT_MONTH_NAME\"<<' '<<\"$CURRENT_YEAR\"<<\", \";",
+			"std::cout<<\"$CURRENT_HOUR\"<<\":\"<<\"$CURRENT_MINUTE\"<<\":\"<<\"$CURRENT_SECOND\"<<\"\\033[0m\\n\";"
 		],
 		"description": "Printing the current time"
 	},
@@ -89,6 +115,24 @@
 			"std::cout<<\"\\t\\033[32mDebugging in function \\033[1;4m\"<<\"${1:function}\"<<\"\\033[0;32;24m passed.\\033[0m\\n\";"
 		],
 		"description": "Debugging in function"
+	},
+
+	"Outside function debugging": {
+		"prefix": "ofdebug",
+		"body": [
+			"std::cout<<\"\\t\\033[45mDEBUG Begin:\\t\\033[0m Function \\033[1;35;4m\"<<\"${1:function}\"<<\"\\033[0m is executing.\\n\";",
+			"${1:function}(${2:arg});",
+			"std::cout<<\"\\t\\033[42mDEBUG End:\\t\\033[0m Function \\033[1;32;4m\"<<\"$1\"<<\"\\033[0m finished.\\n\";"
+		],
+		"description": "Outside function debugging"
+	},
+
+	"Assert type debugging": {
+		"prefix": ["assert", "adebug", "asrt"],
+		"body": [
+			"std::cout<<\"${1:Value}: \"<<$1<<'\n';"
+		],
+		"description": "Assert type debugging"
 	},
 
 	"Iterate with for": {
@@ -144,5 +188,15 @@
 			"}"
 		],
 		"description": "Fork (creating a process)"
+	},
+
+	"File": {
+		"prefix": "fstream",
+		"body": [
+			"fstream ${1:file};",
+			"$0",
+			"$1.close();"
+		],
+		"description": "Default file"
 	}
 }
